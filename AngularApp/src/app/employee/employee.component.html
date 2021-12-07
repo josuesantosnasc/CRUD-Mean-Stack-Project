@@ -1,0 +1,138 @@
+<div class="card" style="width: 60rem;padding-right: 40px;">
+  <div class="card-body">
+    <h5 class="card-title">Employee Form</h5>
+    <div class="row">
+      <div class="col">
+        <form #employeeForm="ngForm" (ngSubmit)='onSubmit(employeeForm)'>
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+          <div class="mb-3">
+            <label for="name" class="form-label"
+              >Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Full name"
+              required
+              
+             
+            />
+        
+          </div>
+          <div class="mb-3">
+            <label for="position" class="form-label"
+              >Position:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="position"
+              #name=ngModel
+              [(ngModel)]="employeeService.selectedEmployee.position"
+              placeholder="Example:Developer"
+              required
+
+             
+            />
+        
+          </div>
+          <div class="mb-3">
+            <label for="office" class="form-label"
+              >Office:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="office"
+              #name="ngModel"
+              [(ngModel)]="employeeService.selectedEmployee.office"
+              placeholder="Enter your location"
+              required
+
+             
+            />
+        
+          </div>
+
+
+          <div class="mb-3">
+            <label for="salary" class="form-label"
+              >Salary:</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="salary"
+              #name=ngModel
+              [(ngModel)]="employeeService.selectedEmployee.salary" 
+              placeholder="Your salary"
+             
+            />
+        
+          </div>
+         
+         
+         
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="col">
+          <h1>Table</h1>
+          <table mat-table [dataSource]="employeeService.employees">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> Position </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.position}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="office">
+              <th mat-header-cell *matHeaderCellDef> Office </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.office}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="salary">
+              <th mat-header-cell *matHeaderCellDef> Salary </th>
+              <td mat-cell *matCellDef="let employee"> {{employee.salary}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="actions">
+              <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+              <mat-cell *matCellDef="let employee" >
+                   <button mat-button (click)="onEdit(employee)" ><a (click)="onEdit(employee)"><i class="fas fa-pen"></i></a></button>
+                   <button mat-button (click)="onDelete(employee._id,employeeForm)" ><a (click)="onDelete(employee._id,employeeForm)"><i class="fas fa-trash"></i></a></button>
+                   
+              </mat-cell>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+           
+
+          </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="toast submit" style="background: #24a331;color:#fff">
+    <div class="toast-body">
+      Submit sucessfully
+    </div>
+  </div>
+
+  <div class="toast update" style="background: #b8791c;color:#fff">
+    <div class="toast-body">
+      Update sucessfully
+    </div>
+  </div>
+
+  <div class="toast delete" style="background: #ad1b02;color:#fff">
+    <div class="toast-body">
+      Delete sucessfully
+    </div>
+  </div>
+</div>
